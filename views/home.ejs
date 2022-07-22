@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+  <style>
+    .bg {
+      background-color: white;
+      margin: 10px;
+    }
+
+    .flex {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .link:hover {
+      cursor: pointer;
+      color: red;
+    }
+    .footer{
+      width: 100%;
+      height: 55px;
+      background-color: rgba(238, 148, 45, 0.938);
+      align-items: center;
+      text-align: center;
+      display: grid;
+     
+     
+    }
+    .navigation{
+      background-color:rgba(238, 148, 45, 0.938);
+     
+    }
+    .main
+    {
+      width: 100%;
+    }
+    
+    div.ex1 {
+  overflow: scroll;
+  height: 400px;
+}
+  </style>
+  <title>TODO</title>
+  <script>
+    function get_id(clicked) {
+
+
+      fetch(("http://localhost:5003/api/v1/tasks/" + clicked), { method: 'DELETE' })
+        .then((res) => window.location.reload());
+    }
+    function update(id) {
+
+
+
+
+    }
+
+
+  </script>
+</head>
+
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid navigation">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">ToDo App</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active "><a href="#">Home</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/register">Sign Up</a></li>
+       
+      </ul>
+    </div>
+  </nav>
+
+  <div class="row main">
+    <div class="col-md-4">
+      <div class="jumbotron bg">
+        <img src="../images/img.png" alt="" width="100%" height="100%">
+      </div>
+    </div>
+    <div class="col-md-7 ">
+
+      <h2 class="text-center"><strong>Your ToDo List</strong></h2>
+      <div class="jumbotron bg flex ex1" style="border: 2px solid rgb(255, 153, 58); ">
+
+        <% for(let i=0;i< data.length;i++){ %>
+          <div class="container">
+            <table class="table table-striped">
+              <tr>
+                <td style="width: 600px;">
+                    <i class="bi bi-circle"> </i>
+                    <%= data[i].name %>
+                </td>
+                
+                <td><a href="/update/<%= data[i]._id%>"><i class="bi bi-pencil-square" id="<%= data[i]._id %>" onclick="update(this.id)"></i></a></td>
+                <td> <i class="bi bi-trash link" id="<%= data[i]._id %>" style="float:right"
+                    onclick=get_id(this.id)></i></td>
+
+              </tr>
+            </table>
+
+
+
+          </div>
+          <% } %>
+        </div>
+        <div class="flex">
+            <p><a href="/addtask"><button type="submit"><i class="bi bi-plus-circle-fill"></i>Add Task</button></a></p></div>
+          
+
+
+    </div>
+  </div>
+  </div>
+
+<div class="footer"> All Rights Reserved @ 2022</div>
+
+</body>
+
+</html>
