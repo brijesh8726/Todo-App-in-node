@@ -1,11 +1,16 @@
 const { redirect } = require('express/lib/response');
+const { Passport } = require('passport/lib');
 const connectMongoose = require('../db_con')
 const{model ,users} = require('../models/task');
+
 connectMongoose();
+
+
 
 const CreateTasks = async (req, res) => {
 
     try {
+        
         const task = await model.create(req.body)
         // console.log(req.body);
         // res.status(201).json({task})
@@ -22,7 +27,9 @@ const CreateTasks = async (req, res) => {
 
 const getAllTasks = async (req, res) => {
     try {
-        const task = await model.find({});
+        // console.log(req.user.id);
+        
+        const task = await model.find({userid:req.user.id});
 
         return task
         res.status(200).json({ task })

@@ -48,36 +48,40 @@
   overflow: scroll;
   height: 400px;
 }
+input[type=checkbox]:checked + label {
+  color:red;
+  text-decoration: line-through;
+} 
   </style>
   <title>TODO</title>
   <script>
     function get_id(clicked) {
 
 
-      fetch(("http://localhost:5003/api/v1/tasks/" + clicked), { method: 'DELETE' })
+      fetch(("http://localhost:5002/api/v1/tasks/" + clicked), { method: 'DELETE' })
         .then((res) => window.location.reload());
     }
-    function update(id) {
-
-
-
-
-    }
-
-
+   
+    // function check(){
+     
+    //   let divElement = document.getElementById("check");
+    
+    //   divElement.setAttribute("checked","checked");
+    // }
   </script>
 </head>
 
 <body>
+  
   <nav class="navbar navbar-default">
     <div class="container-fluid navigation">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">ToDo App</a>
       </div>
       <ul class="nav navbar-nav">
-        <li class="active "><a href="#">Home</a></li>
-        <li><a href="/login">Login</a></li>
-        <li><a href="/register">Sign Up</a></li>
+        <li class="active "><a href="#"><b>Welcome <%= name %></b></a></li>
+        <li><a href="/logout">Logout</a></li>
+        
        
       </ul>
     </div>
@@ -99,8 +103,9 @@
             <table class="table table-striped">
               <tr>
                 <td style="width: 600px;">
-                    <i class="bi bi-circle"> </i>
-                    <%= data[i].name %>
+                    <!-- <i class="bi bi-circle"> </i> -->
+                    <input type="checkbox" id="check" onclick="check()" >
+                    <label><%= data[i].name %></label>
                 </td>
                 
                 <td><a href="/update/<%= data[i]._id%>"><i class="bi bi-pencil-square" id="<%= data[i]._id %>" onclick="update(this.id)"></i></a></td>

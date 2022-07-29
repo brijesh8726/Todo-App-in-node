@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { required } = require('nodemon/lib/config');
 
 const TaskSchema = new mongoose.Schema({
     name:{
@@ -11,7 +12,13 @@ const TaskSchema = new mongoose.Schema({
     completed:{
         type:Boolean,
         default:false
+    },
+    userid:{
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'users',
+        required:true
     }
+   
 
 })
 const userSchema = new mongoose.Schema({
@@ -22,6 +29,7 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+   
     password: String
 });
 const users = mongoose.model("users",userSchema);

@@ -5,6 +5,7 @@ const initializingPassport =(passport)=>{
     passport.use(new LocalStrategy(async (username,password,done)=>{
         try {
             const user = await users.findOne({username});
+           
         if(!user)  return done(null,false);
         if(user.password !== password) return done(null,false);
 
@@ -37,10 +38,15 @@ const initializingPassport =(passport)=>{
 
 
 
-const isauthenticated = (req,res,next)=>{
-    if(req.user) return next();
-    res.redirect('/login');
+// const isauthenticated = (req,res,next)=>{
+    
+//     if(req.user) return next();
+    
+//     res.redirect('/login');
 
-};
-
-module.exports = { initializingPassport , isauthenticated}
+// };
+checkAuthenticated = (req, res, next) => {
+    if (req.isAuthenticated()) { return next() }
+    res.redirect("/login")
+  }
+module.exports = { initializingPassport , checkAuthenticated}

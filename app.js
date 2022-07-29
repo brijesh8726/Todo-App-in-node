@@ -6,13 +6,14 @@ const path = require('path');
 var bodyParser = require('body-parser')
 const passport = require('passport');
 const {model ,users} = require('./models/task');
-const { initializingPassport , isauthenticated} = require('./passport');
+const { initializingPassport , checkAuthenticated} = require('./passport');
 const expressSession= require('express-session');
 
 app.use(express.static('public')); 
 app.use('/images', express.static('images'));
  
 const {getAllTasks,getTask,UpdateTasks,DeleteTasks,CreateTasks} = require("./controller/tasks");
+const { clearCache } = require('ejs');
 
 app.set('view engine', 'ejs');
 initializingPassport(passport);
@@ -31,17 +32,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/api/v1/tasks', tasks);
-app.get('/home',isauthenticated,async (req,res)=>{
-    const data = await getAllTasks();
-   
-  
-    res.render('home',{data:data})
+app.get('/home',checkAuthenticated,async (req,res)=>{
+    const data = await getAllTasks(req,res);
+    
+    res.render('home',{data:data, name: req.user.name, id:req.user.id})
 })
 app.get('/about',(req,res)=>{
     res.render('about')
 })
-app.get('/addtask',isauthenticated,(req,res)=>{
-    res.render('add')
+app.get('/addtask',checkAuthenticated,(req,res)=>{
+    res.render('add', {id:req.user.id})
 })
 app.get('/register',(req,res)=>{
     res.render("register");
@@ -53,7 +53,7 @@ app.get('/login',(req,res)=>{
   app.get('/logout', (req, res, next)=> {
         req.logout((err)=> {
           if (err) { return next(err); }
-          res.send("logout Sucessful");
+          res.redirect('/login');
         });
       });
     
@@ -71,13 +71,15 @@ app.post('/register',async (req,res)=>{
     const user = await users.findOne({username: req.body.username});
     if(user) return res.status(400).send("user already exixts");
     const newUser = await users.create(req.body);
+    res.redirect('/login');
     res.status(201).send(newUser);
 });
 app.post('/login',passport.authenticate('local', {failureRedirect: "./login", successRedirect:"/home"}), async (req,res)=>{
-
+    
+    
 });
 
 
-app.listen(5003,(req,res)=>{
+app.listen(5002,(req,res)=>{
     console.log("server started sucessfully...");
 });
