@@ -21,19 +21,19 @@ const TaskSchema = new mongoose.Schema({
    
 
 })
-const userSchema = new mongoose.Schema({
+// const userSchema = new mongoose.Schema({
 
-    name:String,
-    username:{
-        type: String,
-        required: true,
-        unique: true
-    },
+//     name:String,
+//     username:{
+//         type: String,
+//         required: true,
+//         unique: true
+//     },
    
-    password: String
-});
-const users = mongoose.model("users",userSchema);
+//     password: String
+// });
+// const users = mongoose.model("users",userSchema);
 
 const model = mongoose.model('task',TaskSchema)
 
-module.exports = {model ,users}
+module.exports = {model}

@@ -5,7 +5,8 @@ const ejs = require('ejs');
 const path = require('path');
 var bodyParser = require('body-parser')
 const passport = require('passport');
-const {model ,users} = require('./models/task');
+const {model} = require('./models/task');
+const {users} = require('./models/user');
 const { initializingPassport , checkAuthenticated} = require('./passport');
 const expressSession= require('express-session');
 
