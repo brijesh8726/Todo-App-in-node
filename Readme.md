@@ -5,11 +5,11 @@
     * Mongodb
     * Express.js
 ## Setting Up the project
-    #### Install all the Dependencies using the following command:
+#### Install all the Dependencies using the following command:
     '''
     npm i
     ''''
-    #### Start the server using the following command:
+#### Start the server using the following command:
     '''
      npm start
     '''
