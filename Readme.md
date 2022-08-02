@@ -13,4 +13,4 @@
     '''
      npm start
     '''
-Visit [npm] for more info (https://www.npmjs.com/)
+ [Click here for more info about npm](https://www.npmjs.com/)
