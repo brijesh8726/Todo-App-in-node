@@ -1,12 +1,17 @@
-This is a ToDo app using Node.js
-I have implemented CRUD Opreation using API call
-System Requirements: 
-    Node.js,
-    Mongodb,
-    Express.js
-To run this project use the following command:
-Clone the project and install all the dependencies using the following command:
-    "npm i"
-then start the server using:
-    "npm start"
-Our main server page is: "app.js"
+# This is a ToDo app using Node.js
+### I have implemented CRUD Opreation using API call
+## System Requirements: 
+    * Node.js,
+    * Mongodb,
+    * Express.js
+## Setting Up the project
+    1. Install all the Dependencies using the following command:
+    '''
+    npm i
+    ''''
+    2. Start the server using the following command:
+    '''
+     npm start
+    '''
+
+## Visit [npm] for more info(https://www.npmjs.com/)
