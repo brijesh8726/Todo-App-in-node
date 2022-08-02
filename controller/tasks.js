@@ -1,6 +1,6 @@
 const { redirect } = require('express/lib/response');
 const { Passport } = require('passport/lib');
-const connectMongoose = require('../db_con')
+const connectMongoose = require('../dbCon')
 const{model ,users} = require('../models/task');
 
 connectMongoose();
@@ -25,7 +25,7 @@ const CreateTasks = async (req, res) => {
 }
 
 
-const getAllTasks = async (req, res) => {
+const GetAllTasks = async (req, res) => {
     try {
         // console.log(req.user.id);
         
@@ -40,7 +40,7 @@ const getAllTasks = async (req, res) => {
     }
 
 };
-const getTask = async (req, res) => {
+const GetTask = async (req, res) => {
     try {
         const task = await model.findOne({ _id: req.params.id })
 
@@ -84,4 +84,4 @@ const DeleteTasks = async (req, res) => {
 }
 
 
-module.exports = { getAllTasks, getTask, UpdateTasks, DeleteTasks, CreateTasks }
+module.exports = { GetAllTasks, GetTask, UpdateTasks, DeleteTasks, CreateTasks }

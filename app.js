@@ -12,7 +12,7 @@ const expressSession= require('express-session');
 app.use(express.static('public')); 
 app.use('/images', express.static('images'));
  
-const {getAllTasks,getTask,UpdateTasks,DeleteTasks,CreateTasks} = require("./controller/tasks");
+const {GetAllTasks,GetTask,UpdateTasks,DeleteTasks,CreateTasks} = require("./controller/tasks");
 const { clearCache } = require('ejs');
 
 app.set('view engine', 'ejs');
@@ -33,7 +33,7 @@ app.use(passport.session());
 
 app.use('/api/v1/tasks', tasks);
 app.get('/home',checkAuthenticated,async (req,res)=>{
-    const data = await getAllTasks(req,res);
+    const data = await GetAllTasks(req,res);
     
     res.render('home',{data:data, name: req.user.name, id:req.user.id})
 })
